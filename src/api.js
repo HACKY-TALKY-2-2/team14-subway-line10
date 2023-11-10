@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
 
@@ -12,13 +12,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY,
+);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
-  const response = await supabase
-    .from('Station')
-    .select('*');
+  const response = await supabase.from('Station').select('*');
   // const response = await supabase
   //   .from("Station")
   //   .insert({
@@ -34,11 +35,11 @@ app.get('/', async (req, res) => {
 /**
  * Get all posts descending by updated date
  */
-app.get("/api/posts", async (req, res) => {
+app.get('/api/posts', async (req, res) => {
   const response = await supabase
-    .from("Post")
-    .select("*")
-    .order("updated_at", { ascending: false });
+    .from('Post')
+    .select('*')
+    .order('updated_at', { ascending: false });
 
   res.send(response.data);
 });
@@ -46,14 +47,12 @@ app.get("/api/posts", async (req, res) => {
 /**
  * Post a new post for user type 2 (admin)
  */
-app.post("/api/posts", async (req, res) => {
+app.post('/api/posts', async (req, res) => {
   const { userId, userType, title, content, stationId, typeId } = req.body;
   if (!userId || userType != 2) {
     return;
   }
-  const idResponse = await supabase
-    .from("Post")
-    .select("id");
+  const idResponse = await supabase.from('Post').select('id');
   if (idResponse.error) {
     return;
   }
@@ -63,16 +62,14 @@ app.post("/api/posts", async (req, res) => {
     return item.id > max ? item.id : max;
   }, 0);
 
-  const response = await supabase
-    .from("Post")
-    .insert({
-      id: maxId + 1,
-      user_id: userId,
-      title,
-      content,
-      stationId: stationId,
-      type_id: typeId
-    });
+  const response = await supabase.from('Post').insert({
+    id: maxId + 1,
+    user_id: userId,
+    title,
+    content,
+    stationId: stationId,
+    type_id: typeId,
+  });
 
   if (response.error) {
     res.errored(response.error);
@@ -83,17 +80,12 @@ app.post("/api/posts", async (req, res) => {
 /**
  * Get all post types
  */
-app.get("/api/post-types", async (req, res) => {
-  const response = await supabase
-    .from("PostType")
-    .select("*");
+app.get('/api/post-types', async (req, res) => {
+  const response = await supabase.from('PostType').select('*');
 
   res.send(response.data);
 });
 
-
-
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
