@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
 
@@ -12,13 +12,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY,
+);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
-  const response = await supabase
-    .from('Station')
-    .select('*');
+  const response = await supabase.from('Station').select('*');
   // const response = await supabase
   //   .from("Station")
   //   .insert({
@@ -31,11 +32,11 @@ app.get('/', async (req, res) => {
   console.log(response);
 });
 
-app.get("/api/posts", async (req, res) => {
+app.get('/api/posts', async (req, res) => {
   const response = await supabase
-    .from("Post")
-    .select("*")
-    .order("updated_at", { ascending: false });
+    .from('Post')
+    .select('*')
+    .order('updated_at', { ascending: false });
   console.log(response);
   res.send(response.data);
 });
@@ -43,4 +44,3 @@ app.get("/api/posts", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
