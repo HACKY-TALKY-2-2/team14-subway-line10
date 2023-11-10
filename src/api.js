@@ -100,6 +100,10 @@ app.post('/api/users/star-station', async (req, res) => {
     return;
   }
   
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .select('user_id', userId, 'station_id', stationResponse.data.id);
+
   if (starResponse.error) {
     return;
   }
@@ -112,7 +116,7 @@ app.post('/api/users/star-station', async (req, res) => {
   } else {
     const newStarResponse = await supabase
       .from('UserStarredStation')
-      .select({ user_id: userId, station_id: stationResponse.data.id });
+      .insert({ user_id: userId, station_id: stationResponse.data.id });
     res.send(newStarResponse.data)
   }
 });
