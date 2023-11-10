@@ -34,6 +34,7 @@ export function LoginPage() {
       }
       console.log(response.data);
       alert("로그인 성공!");
+      Router.push('/MainPage');
       return;
     } catch (error) {
       console.error("Error fetching data: ", error);

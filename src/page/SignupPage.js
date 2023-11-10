@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Card } from "../component/Cards/Card.js";
 import { SearchBar } from "../component/SearchBar/SearchBar.js";
+import { Router } from "express";
 
 const InputSection = styled.div(
   () =>
@@ -38,7 +39,7 @@ export function SignupPage() {
         email: signupInput.email,
         password: signupInput.password,
       });
-
+      Router.push('/MainPage');
     } catch (error) {
       console.log(error);
     }
