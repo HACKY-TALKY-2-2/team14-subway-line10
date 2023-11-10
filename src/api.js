@@ -32,6 +32,85 @@ app.get('/', async (req, res) => {
   console.log(response);
 });
 
+app.post('/api/users/join', async (req, res) => {
+  const { email, password, user_type, user_name } = req.body;
+
+  try {
+    if (user_type !== 1 && user_type !== 2) {
+      return;
+    }
+
+    const userResponse = await supabase
+      .from('User')
+      .insert({
+        email: email,
+        password: password,
+        user_type: user_type,
+        user_name: user_name,
+      })
+      .select();
+
+    if (userResponse.error) {
+      return;
+    }
+
+    res.send(userResponse.data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post('/api/users/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const userResponse = await supabase
+      .from('User')
+      .select('*')
+      .eq('email', email)
+      .eq('password', password)
+      .single();
+
+    if (userResponse.error || !userResponse.data) {
+      return;
+    }
+
+    res.send(userResponse.data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+/**
+ * 관심 station 등록
+ */
+app.post('/api/users/star-station', async (req, res) => {
+  const { userId, stationName } = req.body;
+  if (!userId) {
+    return;
+  }
+
+  const stationResponse = await supabase
+    .from('Station')
+    .select('*')
+    .eq('name', stationName)
+    .single();
+
+  if (stationResponse.error || !stationResponse.data) {
+    return;
+  }
+
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .insert({ user_id: userId, station_id: stationResponse.data.id });
+
+  if (starResponse.error) {
+    return;
+  }
+
+  res.send(starResponse.data);
+});
+
 /**
  * Get all posts descending by updated date
  */
