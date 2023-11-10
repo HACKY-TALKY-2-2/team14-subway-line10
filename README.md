@@ -4,6 +4,11 @@
 
 ## 기능
 
+### 1. 지하철 사건사고 알림 받기
+
+- 관심 역을 등록해서, 역마다 발생하는 사건사고에 대한 알림을 받을 수 있어요.
+- 사건사고의 종류 별로 구분된 알림을 받을 수 있어요.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
