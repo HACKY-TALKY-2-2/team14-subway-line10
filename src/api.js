@@ -32,6 +32,62 @@ app.get('/', async (req, res) => {
   console.log(response);
 });
 
+app.post('/api/users/join', async (req, res) => {
+  const { email, password, user_type, user_name } = req.body;
+
+  try {
+    if (user_type !== 1 && user_type !== 2) {
+      return;
+    }
+
+    let { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          user_type: user_type,
+          user_name: user_name,
+        },
+      },
+    });
+
+    if (error) {
+      return;
+    }
+
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post('/api/users/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      return;
+    }
+
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/api/users/logout', async (req, res) => {
+  try {
+    await supabase.auth.signOut();
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 /**
  * Get all posts descending by updated date
  */
