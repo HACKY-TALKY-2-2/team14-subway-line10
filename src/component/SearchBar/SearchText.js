@@ -20,6 +20,6 @@ const SearchBox = styled.div(
 export const SearchText = ({onChange}) => (
   <SearchBox>
     <img src="SearchIcon.png" alt="SearchIcon" height={15} />
-    <input type="text" placeholder="검색어를 입력하세요" onChange={onChange} />
+    <input type="text" placeholder="검색어를 입력하세요" onChange={onChange} style={{width: 325}}/>
   </SearchBox>
 );
