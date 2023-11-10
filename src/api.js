@@ -99,7 +99,11 @@ app.post('/api/users/star-station', async (req, res) => {
   if (stationResponse.error || !stationResponse.data) {
     return;
   }
-  
+
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .insert({ user_id: userId, station_id: stationResponse.data.id });
+
   if (starResponse.error) {
     return;
   }
@@ -108,12 +112,12 @@ app.post('/api/users/star-station', async (req, res) => {
     const deleteResponse = await supabase
       .delete('UserStarredStation')
       .eq('user_id', userId, 'station_id', stationResponse.data.id);
-    res.send(deleteResponse.data)
+    res.send(deleteResponse.data);
   } else {
     const newStarResponse = await supabase
       .from('UserStarredStation')
       .select({ user_id: userId, station_id: stationResponse.data.id });
-    res.send(newStarResponse.data)
+    res.send(newStarResponse.data);
   }
 });
 
