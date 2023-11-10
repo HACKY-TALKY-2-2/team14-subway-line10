@@ -114,7 +114,7 @@ export function UserPage() {
 
   return (
     <div>
-    <Header />
+    <Header userType={userType}/>
     <div style={{ display:'grid', justifyItems: 'center'}}>
         <h2>유저 설정 페이지</h2>
 

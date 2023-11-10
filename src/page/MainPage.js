@@ -55,10 +55,10 @@ export function MainPage() {
           .includes(searchQuery.toLowerCase()),
       )
     : posts;
-
+  const userType = posts.userType;
   return (
     <div className="App">
-      <Layout />
+      <Layout userType={posts.userType}/>
 
       <header className="App-header">
         <div style={{ display: 'grid', justifyItems: 'center' }}>

@@ -113,7 +113,7 @@ export function AdminSettingPage() {
 
   return (
     <div>
-      <Header />
+      <Header userType={userType}/>
       <div style={{ display: 'grid', justifyItems: 'center' }}>
         <h2>Admin 공지 페이지</h2>
         {/* <Dropdown options={lineOptions} onSelect={handleSelect} />

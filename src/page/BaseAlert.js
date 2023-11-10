@@ -111,10 +111,10 @@ export function BaseAlert() {
       console.error('에러~', error);
     });
   };
-
+// I want to pass the user data to the Header component.
   return (
     <div>
-    <Header />
+    <Header userType={userType}/>
     <div style={{ display:'grid', justifyItems: 'center'}}>
         <h2>시민 정보 공유</h2>
         {/* <Dropdown options={lineOptions} onSelect={handleSelect} />
