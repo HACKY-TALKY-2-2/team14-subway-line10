@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import StringInput from '../component/BaseAlert/StringInput.jsx';
 import Header from '../component/layout/Layout.jsx';
@@ -34,14 +35,15 @@ const getColor = (index) => {
   return colors[index % colors.length];
 };
 
-export function AdminSettingPage() {
+
+export function UserPage() {
   const lineOptions = ['2호선'];
   const [eventOptions, setEventOptions] = useState(['서비스공지', '운행장애']);
   // const [selectedLine, setSelectedLine] = useState('2호선');
   const [stationValue, setstationValue] = useState('');
   const [stationList, setstationList] = useState(['역삼역']);
   const [selectedTags, setSelectedTags] = useState([]);
-
+  
   // // 에러 생길시 이 파트 수정 바랍니다.
   // useState(() => {
   //   const response = axios.get('http://localhost:5000//api/post-types')
@@ -50,7 +52,7 @@ export function AdminSettingPage() {
   //   setEventOptions([...eventOptions, element.name]);
   //   });
   // }, []);
-
+  
   // const handleSelect = (value) => {
   //   console.log(`Selected: ${value}`);
   //   setSelectedLine(value);
@@ -84,67 +86,35 @@ export function AdminSettingPage() {
       }
     }
     return -1;
-  };
-  const stationId = stationIdCheck(stationValue);
+  }
+
   const handleSubmit = async () => {
-    // console.error(userId,
-    //   userType: userType,
-    //   title: accidentTitle,
-    //   content: accidentContent,
-    //   stationId: stationId,
-    //   typeId: selectedTags);
-    const server = process.env.SERVER_URL;
-    await axios
-      .post(server + '/posts', {
-        userId: userId,
-        userType: userType,
-        title: accidentTitle,
-        content: accidentContent,
-        stationId: stationId,
-        typeId: selectedTags,
-      })
-      ?.then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error('에러~', error);
-      });
+  const baseURL = process.env.SERVER_URL;
+  await axios.post(baseURL+'/users/star-station', {
+      userId: userId,
+      stationName: stationValue
+    })
+    .catch(error => {
+      console.error('userPage 에러 발생:', error);
+    });
   };
 
   return (
     <div>
-      <Header userType={userType}/>
-      <div style={{ display: 'grid', justifyItems: 'center' }}>
-        <h2>Admin 공지 페이지</h2>
-        {/* <Dropdown options={lineOptions} onSelect={handleSelect} />
-        <br /> */}
+    <Header userType={userType}/>
+    <div style={{ display:'grid', justifyItems: 'center'}}>
+        <h2>유저 설정 페이지</h2>
+
         <StringInput
-          value={stationValue}
-          onChange={handleStationChange}
-          placeholder="공지와 연관된 역 이름을 알려주세요!"
+        value={stationValue}
+        onChange={handleStationChange}
+        placeholder="공지를 받을 역 이름을 입력해주세요!"
         />
         <br />
-        {/* <TagInput value={tagInput} onChange={handleTagInputChange} onEnter={() => handleTagChange(tagInput)} /> */}
-        <TagDropdown options={eventOptions} onChange={handleTagChange} />
-        <TagDisplay tags={selectedTags} onTagClick={handleTagClick} />
-        <br />
-        <br />
-        <StringInput
-          value={accidentTitle}
-          onChange={(e) => setAccidentTitle(e.target.value)}
-          placeholder="공지의 제목을 작성해주세요!"
-        />
-        <br />
-        <StringInput
-          value={accidentContent}
-          onChange={(e) => setAccidentContent(e.target.value)}
-          placeholder="공지의 내용을 작성해주세요!"
-        />
-        <br />
-        <a href="/" style={{ textDecoration: 'none' }}>
-          <SendButton text="공지 전송" onClick={handleSubmit} />
+        <a href='/' style={{ textDecoration: 'none' }}>
+        <SendButton text="확인" onClick={handleSubmit} />
         </a>
-      </div>
+    </div>
     </div>
   );
 }
