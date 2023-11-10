@@ -1,3 +1,9 @@
+# Team 14 Subway Line10
+
+지하철 사건사고 알리미 - 출퇴근 길을 편하게
+
+## 기능
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
