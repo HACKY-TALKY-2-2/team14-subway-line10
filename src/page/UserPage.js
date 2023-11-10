@@ -87,28 +87,15 @@ export function UserPage() {
     }
     return -1;
   }
-  const stationId = stationIdCheck(stationValue);
+
   const handleSubmit = async () => {
-    // console.error(userId,
-    //   userType: userType,
-    //   title: accidentTitle,
-    //   content: accidentContent,
-    //   stationId: stationId,
-    //   typeId: selectedTags);
-    
-    await axios.post('http://localhost: /submit', {
+  const baseURL = process.env.SERVER_URL;
+  await axios.post(baseURL+'/users/star-station', {
       userId: userId,
-      userType: userType,
-      title: accidentTitle,
-      content: accidentContent,
-      stationId: stationId,
-      typeId: selectedTags,
-    })
-    ?.then(response => {
-      console.log(response);
+      stationName: stationValue
     })
     .catch(error => {
-      console.error('에러~', error);
+      console.error('userPage 에러 발생:', error);
     });
   };
 
