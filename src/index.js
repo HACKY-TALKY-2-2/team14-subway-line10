@@ -1,15 +1,26 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals.js';
 import { MainPage } from './page/MainPage.js';
-
+import { BaseAlert } from './page/BaseAlert.js';
+import { AdminSettingPage } from './page/AdminSettingPage.js';
+import { UserPage } from './page/UserPage.js';
+;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MainPage />
+    <Router>
+      <Routes>  
+        <Route path="/" element={<MainPage />} />
+        <Route path="/BaseAlert" element={<BaseAlert />} />
+        <Route path="/AdminSettingPage" element={<AdminSettingPage />} />
+        <Route path="/UserPage" element={<UserPage />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
