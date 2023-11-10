@@ -166,7 +166,10 @@ app.get('/api/post-types', async (req, res) => {
 });
 
 app.get('/api/stations', async (req, res) => {
-  const response = await supabase.from('Station').select('*').order('id');
+  const response = await supabase
+    .from('Station')
+    .select('id, name')
+    .order('id');
 
   res.send(response.data);
 });
