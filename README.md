@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+```
+git clone https://github.com/HACKY-TALKY-2-2/team14-subway-line10.git
+pnpm install
+pnpm start
+```
+
 In the project directory, you can run:
 
 ### `npm start`
