@@ -7,8 +7,8 @@ import { LineTag } from "../component/LineTag.js";
 const TagBox = styled.div(
   () =>
     css`
-    width: fit-content;
-    height: fit-content;
+      width: fit-content;
+      height: fit-content;
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
@@ -18,8 +18,8 @@ const TagBox = styled.div(
     `
 );
 
-export const Tag = ({ type }) => (
+export const Tag = ({ typetag, linetag }) => (
   <TagBox>
-    <TypeTag type="announcement" /> <LineTag type="lineAll" />
+    <TypeTag type={typetag} /> <LineTag type={linetag} />
   </TagBox>
 );
