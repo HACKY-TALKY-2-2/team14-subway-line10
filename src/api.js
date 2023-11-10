@@ -165,6 +165,12 @@ app.get('/api/post-types', async (req, res) => {
   res.send(response.data);
 });
 
+app.get('/api/stations', async (req, res) => {
+  const response = await supabase.from('Station').select('*').order('id');
+
+  res.send(response.data);
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
