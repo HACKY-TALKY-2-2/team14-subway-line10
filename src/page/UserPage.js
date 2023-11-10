@@ -124,7 +124,7 @@ export function UserPage() {
         placeholder="공지를 받을 역 이름을 입력해주세요!"
         />
         <br />
-        <a href='/'>
+        <a href='/' style={{ textDecoration: 'none' }}>
         <SendButton text="확인" onClick={handleSubmit} />
         </a>
     </div>

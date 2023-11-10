@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <div className="header-container">
       <div className="header-titles">
-        <a href="./UserPage">
+        <a href="./UserPage" style={{ textDecoration: 'none' }}>
           <img
             src="./headerImg/icon_person.png"
             alt="Icon 1"
@@ -15,12 +15,12 @@ const Layout = () => {
           />
         </a>
         
-        <a href="/">
+        <a href="/" style={{ textDecoration: 'none' }}>
           <div className="title-wrapper">
             <h1 className="header-title">Subway - Line 10</h1>
           </div>
         </a>
-        <a href="./AdminSettingPage">
+        <a href="./AdminSettingPage" style={{ textDecoration: 'none' }}>
           <img
             src="./headerImg/icon_warning.png"
             alt="Icon 2"

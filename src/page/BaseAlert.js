@@ -142,7 +142,7 @@ export function BaseAlert() {
         placeholder="사건의 내용을 작성해주세요!"
         />
         <br />
-        <a href='/'>
+        <a href='/' style={{ textDecoration: 'none' }}>
         <SendButton text="사건 전송" onClick={handleSubmit} />
         </a>
     </div>
