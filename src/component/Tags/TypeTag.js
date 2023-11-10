@@ -3,8 +3,12 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 const tagNames = {
-  lineAll: "수도권 전노선",
-  lineTwo: "2호선",
+  announcement: "서비스공지",
+  service_disruption: "운행장애",
+  railway_accident: "철도안전사고",
+  train_accident: "열차사고",
+  casuality: "사상사고",
+  disaster: "재난",
 };
 
 const TagInner = styled.div(
@@ -16,7 +20,7 @@ const TagInner = styled.div(
     font-family: Noto Sans KR;
     font-size: 10px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 800;
     line-height: normal;
   `
 );
@@ -31,12 +35,11 @@ const TagBox = styled.div(
       height: fit-content;
       display: flex;
       border-radius: 2px;
-      background: #ede9ff;
-      gap: 5px;
+      background: rgba(32, 36, 87, 0.3);
     `
 );
 
-export const LineTag = ({ type }) => (
+export const TypeTag = ({ type }) => (
   <TagBox>
     <TagInner type={type}>#{tagNames[type]}</TagInner>
   </TagBox>

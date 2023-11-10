@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { TypeTag } from "../component/TypeTag.js";
-import { LineTag } from "../component/LineTag.js";
+import { TypeTag } from "./TypeTag.js";
+import { LineTag } from "./LineTag.js";
 
 const TagBox = styled.div(
   () =>
