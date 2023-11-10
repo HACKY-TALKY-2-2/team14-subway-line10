@@ -40,22 +40,21 @@ app.post('/api/users/join', async (req, res) => {
       return;
     }
 
-    let { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          user_type: user_type,
-          user_name: user_name,
-        },
-      },
-    });
+    const userResponse = await supabase
+      .from('User')
+      .insert({
+        email: email,
+        password: password,
+        user_type: user_type,
+        user_name: user_name,
+      })
+      .select();
 
-    if (error) {
+    if (userResponse.error) {
       return;
     }
 
-    res.send(data);
+    res.send(userResponse.data);
   } catch (err) {
     console.log(err);
   }
@@ -65,27 +64,51 @@ app.post('/api/users/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
+    const userResponse = await supabase
+      .from('User')
+      .select('*')
+      .eq('email', email)
+      .eq('password', password)
+      .single();
 
-    if (error) {
+    if (userResponse.error || !userResponse.data) {
       return;
     }
 
-    res.send(data);
+    res.send(userResponse.data);
   } catch (err) {
     console.log(err);
   }
 });
 
-app.get('/api/users/logout', async (req, res) => {
-  try {
-    await supabase.auth.signOut();
-  } catch (err) {
-    console.log(err);
+/**
+ * 관심 station 등록
+ */
+app.post('/api/users/star-station', async (req, res) => {
+  const { userId, stationName } = req.body;
+  if (!userId) {
+    return;
   }
+
+  const stationResponse = await supabase
+    .from('Station')
+    .select('*')
+    .eq('name', stationName)
+    .single();
+
+  if (stationResponse.error || !stationResponse.data) {
+    return;
+  }
+
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .insert({ user_id: userId, station_id: stationResponse.data.id });
+
+  if (starResponse.error) {
+    return;
+  }
+
+  res.send(starResponse.data);
 });
 
 /**
