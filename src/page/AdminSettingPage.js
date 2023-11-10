@@ -141,7 +141,7 @@ export function AdminSettingPage() {
           placeholder="공지의 내용을 작성해주세요!"
         />
         <br />
-        <a href="/">
+        <a href="/" style={{ textDecoration: 'none' }}>
           <SendButton text="공지 전송" onClick={handleSubmit} />
         </a>
       </div>
