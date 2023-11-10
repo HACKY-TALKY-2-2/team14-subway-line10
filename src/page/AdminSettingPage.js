@@ -93,9 +93,9 @@ export function AdminSettingPage() {
     //   content: accidentContent,
     //   stationId: stationId,
     //   typeId: selectedTags);
-
+    const server = process.env.SERVER_URL;
     await axios
-      .post('http://localhost: /submit', {
+      .post(server + '/posts', {
         userId: userId,
         userType: userType,
         title: accidentTitle,

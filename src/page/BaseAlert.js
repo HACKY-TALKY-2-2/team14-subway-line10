@@ -1,10 +1,11 @@
-
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import StringInput from '../component/BaseAlert/StringInput.jsx';
 import Header from '../component/layout/Layout.jsx';
 import SendButton from '../component/BaseAlert/SendButton.jsx';
 import axios from 'axios';
 import TagDropdown from '../component/BaseAlert/TagDropdown.jsx';
+
 // TagDisplay 컴포넌트: 선택된 태그를 보여주는 부분
 const TagDisplay = ({ tags, onTagClick }) => {
   return (
@@ -34,7 +35,6 @@ const getColor = (index) => {
   const colors = ['#FF5733', '#33FF57', '#5733FF', '#33FFFF', '#FF33F9'];
   return colors[index % colors.length];
 };
-
 
 export function BaseAlert() {
   const lineOptions = ['2호선'];
@@ -95,8 +95,9 @@ export function BaseAlert() {
     //   content: accidentContent,
     //   stationId: stationId,
     //   typeId: selectedTags);
-    
-    await axios.post('http://localhost: /submit', {
+    const server = process.env.SERVER_URL;
+    await axios
+      .post(server + '/posts', {
       userId: userId,
       userType: userType,
       title: accidentTitle,
@@ -104,11 +105,8 @@ export function BaseAlert() {
       stationId: stationId,
       typeId: selectedTags,
     })
-    ?.then(response => {
-      console.log(response);
-    })
     .catch(error => {
-      console.error('에러~', error);
+      console.error('에러 발생:', error);
     });
   };
 // I want to pass the user data to the Header component.

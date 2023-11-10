@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
 
-const port = 3000;
+const port = 8000;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
   console.log(response);
 });
 
-app.get('/api/posts', async (req, res) => {
+app.get('/api/post', async (req, res) => {
   const response = await supabase
     .from('Post')
     .select('*')
