@@ -1,0 +1,42 @@
+.tag-dropdown {
+    width: 330px;
+    height: 44px;
+    border: none;
+    border-bottom: 1px solid var(--Channel-Midnight, #202457);
+    padding: 8px 16px;
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    color: #202457;
+    font-size: 16px;
+    text-align: left;
+  
+    -webkit-appearance: none; /* 크롬, 사파리용 */
+    -moz-appearance: none;    /* 파이어폭스용 */
+  }
+  
+  /* 드롭다운 옵션 스타일 */
+  .tag-dropdown option {
+    color: black;
+  }
+  
+  /* 비활성화된 옵션(placeholder) 스타일 */
+  .tag-dropdown option[disabled] {
+    color: grey;
+  }
+  
+  /* 드롭다운 호버 효과 */
+  .tag-dropdown:hover {
+    background-color: #f2f2f2;
+  }
+  
+  /* IE11에서 드롭다운 화살표 숨기기 */
+  .tag-dropdown::-ms-expand {
+    display: none;
+  }
+  
+  /* 파이어폭스에서 텍스트에 포커스 링이 보이지 않도록 설정 */
+  .tag-dropdown:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }

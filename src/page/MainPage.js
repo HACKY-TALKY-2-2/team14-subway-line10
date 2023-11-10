@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Card } from "../component/Cards/Card.js";
 import { SearchBar } from "../component/SearchBar/SearchBar.js";
+import Layout from "../component/layout/Layout.jsx";
 
 const CardSection = styled.div(
   () =>
@@ -55,6 +56,7 @@ export function MainPage() {
 
   return (
     <div className="App">
+      <Layout />
       <header className="App-header">
         <CardSection>
           <SearchBar />

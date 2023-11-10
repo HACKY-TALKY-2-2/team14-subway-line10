@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { BaseAlert } from './page/BaseAlert';
 
 function App() {
   return (
