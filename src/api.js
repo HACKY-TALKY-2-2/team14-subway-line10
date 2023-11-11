@@ -105,6 +105,10 @@ app.post('/api/users/star-station', async (req, res) => {
     .from('UserStarredStation')
     .select('user_id', userId, 'station_id', stationResponse.data.id);
   
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .select('user_id', userId, 'station_id', stationResponse.data.id);
+
   if (starResponse.error) {
     return;
   }
