@@ -4,6 +4,7 @@ import Header from '../component/layout/Layout.jsx';
 import SendButton from '../component/BaseAlert/SendButton.jsx';
 import axios from 'axios';
 import TagDropdown from '../component/BaseAlert/TagDropdown.jsx';
+
 // TagDisplay 컴포넌트: 선택된 태그를 보여주는 부분
 const TagDisplay = ({ tags, onTagClick }) => {
   return (
@@ -73,8 +74,8 @@ export function AdminSettingPage() {
     setSelectedTags(updatedTags);
   };
   ////////////////////////////
-  const userId = 1111;
-  const userType = 1;
+  const userId = 7;
+  const userType = 2;
   const [accidentTitle, setAccidentTitle] = useState('');
   const [accidentContent, setAccidentContent] = useState('');
   const stationIdCheck = (stationName) => {
@@ -95,7 +96,7 @@ export function AdminSettingPage() {
     //   typeId: selectedTags);
     const server = process.env.SERVER_URL;
     await axios
-      .post(server + '/posts', {
+      .post('http://loaclhost:8000/api/posts', {
         userId: userId,
         userType: userType,
         title: accidentTitle,
@@ -141,9 +142,9 @@ export function AdminSettingPage() {
           placeholder="공지의 내용을 작성해주세요!"
         />
         <br />
-        <a href="/" style={{ textDecoration: 'none' }}>
+        {/* <a href="/" style={{ textDecoration: 'none' }}> */}
           <SendButton text="공지 전송" onClick={handleSubmit} />
-        </a>
+        {/* </a> */}
       </div>
     </div>
   );

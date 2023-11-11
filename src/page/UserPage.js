@@ -75,14 +75,14 @@ export function UserPage() {
     setSelectedTags(updatedTags);
   };
   ////////////////////////////
-  const userId = 1111;
-  const userType = 1;
+  const userId = 7;
+  const userType = 2;
   const [accidentTitle, setAccidentTitle] = useState('');
   const [accidentContent, setAccidentContent] = useState('');
   const stationIdCheck = (stationName) => {
     for (let i = 0; i < stationList.length; i++) {
       if (stationList[i] === stationName) {
-        return i;
+        return i + 1;
       }
     }
     return -1;
@@ -96,13 +96,13 @@ export function UserPage() {
     //   stationId: stationId,
     //   typeId: selectedTags);
     
-    await axios.post('http://localhost: /submit', {
+    await axios.post('http://localhost:8000/api/users/login', {
       userId: userId,
       userType: userType,
       title: accidentTitle,
       content: accidentContent,
       stationId: stationId,
-      typeId: selectedTags,
+      typeId: 1,
     })
     ?.then(response => {
       console.log(response);
@@ -124,9 +124,9 @@ export function UserPage() {
         placeholder="공지를 받을 역 이름을 입력해주세요!"
         />
         <br />
-        <a href='/' style={{ textDecoration: 'none' }}>
+        {/* <a href='/' style={{ textDecoration: 'none' }}> */}
         <SendButton text="확인" onClick={handleSubmit} />
-        </a>
+        {/* </a> */}
     </div>
     </div>
   );

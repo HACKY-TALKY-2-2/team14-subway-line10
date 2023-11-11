@@ -34,7 +34,7 @@ export function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/posts');
+        const response = await axios.get('http://localhost:8000/api/posts');
         setPosts(response.data);
       } catch (error) {
         console.error('Error fetching data: ', error);
