@@ -39,9 +39,9 @@ const getColor = (index) => {
 export function BaseAlert() {
   const lineOptions = ['2호선'];
   const [eventOptions, setEventOptions] = useState(['서비스공지', '운행장애']);
-  // const [selectedLine, setSelectedLine] = useState('2호선');
+  // const [selectedLine  , setSelectedLine] = useState('2호선');
   const [stationValue, setstationValue] = useState('');
-  const [stationList, setstationList] = useState(['역삼역']);
+  const [stationList, setstationList] = useState(['역삼']);
   const [selectedTags, setSelectedTags] = useState([]);
   
   // // 에러 생길시 이 파트 수정 바랍니다.
@@ -75,11 +75,19 @@ export function BaseAlert() {
     setSelectedTags(updatedTags);
   };
   ////////////////////////////
-  const userId = 1111;
-  const userType = 1;
+  const userId = 7;
+  const userType = 2;
   const [accidentTitle, setAccidentTitle] = useState('');
   const [accidentContent, setAccidentContent] = useState('');
   const stationIdCheck = (stationName) => {
+    for (let i = 0; i < stationList.length; i++) {
+      if (stationList[i] === stationName) {
+        return i+1;
+      }
+    }
+    return -1;
+  }
+  const tIdCheck = (stationName) => {
     for (let i = 0; i < stationList.length; i++) {
       if (stationList[i] === stationName) {
         return i;
@@ -90,20 +98,20 @@ export function BaseAlert() {
   const stationId = stationIdCheck(stationValue);
   const handleSubmit = async () => {
     // console.error(userId,
+    console.log(stationId);
     //   userType: userType,
     //   title: accidentTitle,
     //   content: accidentContent,
     //   stationId: stationId,
     //   typeId: selectedTags);
-    const server = process.env.SERVER_URL;
     await axios
-      .post(server + '/posts', {
-      userId: userId,
-      userType: userType,
+      .post('http://localhost:8000/api/posts', {
+      userType: 2,
+      userId: 7,
       title: accidentTitle,
       content: accidentContent,
       stationId: stationId,
-      typeId: selectedTags,
+      typeId: 1,
     })
     .catch(error => {
       console.error('에러 발생:', error);
@@ -140,9 +148,9 @@ export function BaseAlert() {
         placeholder="사건의 내용을 작성해주세요!"
         />
         <br />
-        <a href='/' style={{ textDecoration: 'none' }}>
+        {/* <a href='/' style={{ textDecoration: 'none' }}> */}
         <SendButton text="사건 전송" onClick={handleSubmit} />
-        </a>
+        {/* </a> */}
     </div>
     </div>
   );

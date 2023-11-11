@@ -75,7 +75,7 @@ export function UserPage() {
     setSelectedTags(updatedTags);
   };
   ////////////////////////////
-  const userId = 1111;
+  const userId = 7;
   const userType = 1;
   const [accidentTitle, setAccidentTitle] = useState('');
   const [accidentContent, setAccidentContent] = useState('');
@@ -90,12 +90,12 @@ export function UserPage() {
 
   const handleSubmit = async () => {
   const baseURL = process.env.SERVER_URL;
-  await axios.post(baseURL+'/users/star-station', {
+  await axios.post( 'http://localhost:8000/api/users/star-station', {
       userId: userId,
       stationName: stationValue
     })
     .catch(error => {
-      console.error('userPage 에러 발생:', error);
+      console.error('userPage 에러 발생: ', error);
     });
   };
 
@@ -111,9 +111,9 @@ export function UserPage() {
         placeholder="공지를 받을 역 이름을 입력해주세요!"
         />
         <br />
-        <a href='/' style={{ textDecoration: 'none' }}>
+        {/* <a href='/' style={{ textDecoration: 'none' }}> */}
         <SendButton text="확인" onClick={handleSubmit} />
-        </a>
+        {/* </a> */}
     </div>
     </div>
   );

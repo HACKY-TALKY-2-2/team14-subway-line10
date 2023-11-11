@@ -33,8 +33,9 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/api/users/join', async (req, res) => {
+  console.log("asdfasdf");
+  
   const { email, password, user_type, user_name } = req.body;
-
   try {
     if (user_type !== 1 && user_type !== 2) {
       return;
@@ -99,6 +100,10 @@ app.post('/api/users/star-station', async (req, res) => {
   if (stationResponse.error || !stationResponse.data) {
     return;
   }
+
+  const starResponse = await supabase
+    .from('UserStarredStation')
+    .select('user_id', userId, 'station_id', stationResponse.data.id);
   
   if (starResponse.error) {
     return;
@@ -106,13 +111,14 @@ app.post('/api/users/star-station', async (req, res) => {
 
   if (starResponse.data.length > 0) {
     const deleteResponse = await supabase
-      .delete('UserStarredStation')
+      .from('UserStarredStation')
+      .delete()
       .eq('user_id', userId, 'station_id', stationResponse.data.id);
     res.send(deleteResponse.data)
   } else {
     const newStarResponse = await supabase
       .from('UserStarredStation')
-      .select({ user_id: userId, station_id: stationResponse.data.id });
+      .insert({ user_id: userId, station_id: stationResponse.data.id });
     res.send(newStarResponse.data)
   }
 });
@@ -134,6 +140,8 @@ app.get('/api/posts', async (req, res) => {
  */
 app.post('/api/posts', async (req, res) => {
   const { userId, userType, title, content, stationId, typeId } = req.body;
+  console.log(req.body);
+  console.log('hi');
   if (!userId || userType != 2) {
     return;
   }
@@ -146,17 +154,18 @@ app.post('/api/posts', async (req, res) => {
   const maxId = idList.reduce((max, item) => {
     return item.id > max ? item.id : max;
   }, 0);
-
+  console.log(maxId, userId, title, content, stationId, typeId);
   const response = await supabase.from('Post').insert({
     id: maxId + 1,
     user_id: userId,
     title,
     content,
-    stationId: stationId,
+    station_id: stationId,
     type_id: typeId,
   });
 
   if (response.error) {
+    console.log(response.error);
     res.errored(response.error);
   }
   res.send(response.data);

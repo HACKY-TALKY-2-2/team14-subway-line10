@@ -59,7 +59,7 @@ export function MainPage() {
   const userId = posts.userId;
   return (
     <div className="App">
-      <Layout userType={2}/>
+      <Layout userType={1}/>
 
       <header className="App-header">
         <div style={{ display: 'grid', justifyItems: 'center' }}>

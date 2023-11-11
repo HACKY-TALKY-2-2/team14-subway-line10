@@ -5,6 +5,8 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals.js';
 import { MainPage } from './page/MainPage.js';
+import { LoginPage } from './page/LoginPage.js';
+import { SignupPage } from './page/SignupPage.js';
 import { BaseAlert } from './page/BaseAlert.js';
 import { AdminSettingPage } from './page/AdminSettingPage.js';
 import { UserPage } from './page/UserPage.js';
@@ -16,6 +18,8 @@ root.render(
     <Router>
       <Routes>  
         <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/BaseAlert" element={<BaseAlert />} />
         <Route path="/AdminSettingPage" element={<AdminSettingPage />} />
         <Route path="/UserPage" element={<UserPage />} />
